@@ -4,4 +4,4 @@
 
 # ignore __pycache__
 
-# ignore .DS_Store
+# ignore .DS_.venv/
