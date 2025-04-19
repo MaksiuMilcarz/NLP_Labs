@@ -1,0 +1,7 @@
+# ignore venv
+/venv
+
+
+# ignore __pycache__
+
+# ignore .DS_Store
