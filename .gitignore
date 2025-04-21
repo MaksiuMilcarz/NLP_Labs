@@ -1,1 +1,9 @@
-.venv/
+# ignore venv
+/venv
+/env
+
+
+
+# ignore __pycache__
+
+# ignore .DS_.venv/
