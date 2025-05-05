@@ -26,3 +26,29 @@ IDEA:
     - delete redundant system info
 1. Mean length: 7.769
 2. BLEU score: 6.073154381625874
+
+Model A:
+Qwen/Qwen3-0.6B
+system_prompt = (
+    "Always give short answers that still have meaning."
+)
+prompt = f"""See the examples of giving a title to the sentence in as little words as possible:
+
+Examples:
+Compress the following sentence: {"After much deliberation, the board decided to approve the new marketing strategy, which aims to expand our reach in international markets and significantly increase our digital presence over the next 12 months."} 
+Compressed: Board approves international marketing strategy
+
+Compress the following sentence: {"Due to unforeseen circumstances, the manager was unable to attend the scheduled meeting because of an urgent client issue that arose at the last minute, requiring immediate attention."}  
+Compressed: Manager misses meeting for client issue
+
+Compress the following sentence: {"Although it was raining heavily and traffic was congested, I managed to make it to the airport just in time for my flight, thanks to my careful planning and the buffer I had built into my schedule."}  
+Compressed: Made flight despite heavy rain
+
+Now give a title to the sentence in as little words as possible::
+Compress the following sentence: {sentence}  
+"""
+IDEA:
+    - new Model
+    - adding the idea of giving short answers and keeping the meaning to the system prompt
+    - using the title trick to the prompt
+    - few-shot
