@@ -79,6 +79,9 @@ IDEA:
 
 
 
+
+
+
 Model 5: (keep it simple, 3-shot)
 system_prompt = "Always give short answers that still have meaning."
 >>>>>>> refs/remotes/origin/main
@@ -137,9 +140,44 @@ IDEA:
 
 
 
+
 THE PROBLEM WITH BLUE SCORE:
 1. BLEU is strict. It prefers identical phrasing, so creative or diverse compressions can unfairly score low
 2. Good compression may lower BLEU if it uses different but valid word choices or structure - doesnt work well with paraphrasing
+
+
+
+
+
+
+
+
+Model Standard 1
+prompt = f"""give the following text in its shortest form: {sentence} tl;dr - Compressed: """
+system_prompt='Your job is to compress text to the shortest accurate version possible. Pay special attention to proper names,
+nationalities, and who did what — do not mix them up or you die. For example: text: In a very exciting and heated game in Wembley
+Stadium the English come out victorious against the brutish French. Compressed: England beats France at Wembley.'
+Mean length: 10.356
+BLEU score: 10.275062866431211
+
+Model Standard 2
+prompt = f"""give the following text in its shortest form, as a title of 5 words at most: {sentence} tl;dr - Compressed: """
+system_prompt='Your job is to compress text to the shortest accurate version possible. Pay special attention to proper names,
+nationalities, and who did what — do not mix them up or you die. For example: text: In a very exciting and heated game in Wembley
+Stadium the English come out victorious against the brutish French. Compressed: England beats France at Wembley.'
+Mean length: 6.663
+BLEU score: 11.400262712187459
+
+Model Standard 3
+prompt = f"""give the following text in its shortest form, as a title of 5 words at most: {sentence} tl;dr - Compressed: """
+system_prompt = 'Your job is to compress text to the SHORTEST accurate version possible. Pay special attention to names, nationalities, and who did what — do not mix them up or you DIE.
+For example, text: In a very exciting and heated game in Wembley Stadium the English come out victorious against the brutish French.
+Compressed: England beats France at Wembley.
+Another example: after John had completed his workout, he found himself weak struggling to grasp the mug of coffee on the table in front of him.
+Compressed: John struggles to pick up a mug'
+Mean length: 6.653
+BLEU score: 12.441883386716718
+
 
 
 
