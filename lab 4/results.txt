@@ -1,0 +1,9 @@
+Reference Scores:
+1. Mean length: 6.966
+
+Baseline:
+system_prompt = "You are Qwen, created by Alibaba Cloud. You are a helpful assistant."
+prompt = f"Compress the following sentence: {sentence} Compressed: "
+1. Mean length: 26.138
+2. BLEU score: 5.022086365305683
+
