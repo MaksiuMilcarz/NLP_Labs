@@ -8,7 +8,7 @@ prompt = f"Compress the following sentence: {sentence} Compressed: "
 2. BLEU score: 5.022086365305683
 
 
-Model 2:
+Model 2: (initial ideas)
 system_prompt = (
         "You are an elite sentence compression expert, trained to reduce verbose English sentences to their most compact form without losing meaning. "
         "You compress language like an expert editor writing headlines—every word must earn its place. Your output is evaluated based on:\n"
@@ -26,3 +26,116 @@ IDEA:
     - delete redundant system info
 1. Mean length: 7.769
 2. BLEU score: 6.073154381625874
+
+
+Model 3: (refining those ideas)
+system_prompt = (
+    "You are a master text compresser specializing in creating ultra-short, impactful titles. "
+    "Your expertise lies in identifying and retaining *only* the absolute core meaning (key subject, action, outcome) of a sentence. "
+    "Every single word in your output must be essential and carry significant meaning. "
+    "Your compressed text will function as a concise, accurate headline or title. "
+    "Your primary goal is to achieve maximum possible brevity while preserving essential information. "
+    "Ruthlessly eliminate all filler words, modifiers, repetition, and any details that are not absolutely critical to the main point. "
+    "Strive for a natural, punchy headline style. "
+    "You will *never* include explanations, introductions, or any text other than the final compressed title."
+)
+prompt = f"Sentence: {sentence}\nCompress this sentence into a short title, using a maximum of 5 words.\nCompressed Title:"
+IDEA: 
+    - Use expert person
+    - identyfies core concepts
+    - headlines style output 
+    - simpler and punchy user prompt
+1. Mean length: 6.977                  
+2. BLEU score: 6.073154381625874
+
+
+Model 4: (3-shot, more refinements)
+system_prompt = (
+    "You are an expert in sentence distillation, converting long sentences into short, information-dense titles. "
+    "Focus solely on capturing the main subject and its primary action or outcome. "
+    "Every word must contribute significantly to the title's meaning. "
+    "Your output is a direct, concise headline – accurate, brief, and natural. "
+    "Criteria: Meaning preserved, maximum brevity, high precision, fluent title style. "
+)
+prompt = f"""Here are examples of verbose sentences compressed into concise titles (maximum 5 words):
+
+Sentence: The company announced a significant increase in its quarterly profits compared to the previous year.
+Compressed Title: Company Profits Rise Sharply
+
+Sentence: Archaeologists discovered ancient pottery artifacts dating back to the Roman Empire in the excavation site.
+Compressed Title: Ancient Roman Pottery Discovered
+
+Sentence: A major traffic accident occurred on the highway this morning, causing significant delays for commuters.
+Compressed Title: Highway Accident Causes Delays
+
+Now, compress the following sentence based on the examples:
+Sentence: {sentence}
+Compressed Title:"""
+IDEA: 
+    - Few shot
+    - More clear and concise prompts
+1. Mean length: 6.479               
+2. BLEU score: 3.3773367015754316
+
+
+
+Model 5: (keep it simple, 3-shot)
+system_prompt = "Always give short answers that still have meaning."
+prompt = f"""See the examples of giving a title to the sentence in as little words as possible:
+
+Examples:
+Compress the following sentence: {"After much deliberation, the board decided to approve the new marketing strategy, which aims to expand our reach in international markets and significantly increase our digital presence over the next 12 months."} 
+Compressed: Board approves international marketing strategy
+
+Compress the following sentence: {"Due to unforeseen circumstances, the manager was unable to attend the scheduled meeting because of an urgent client issue that arose at the last minute, requiring immediate attention."}  
+Compressed: Manager misses meeting for client issue
+
+Compress the following sentence: {"Although it was raining heavily and traffic was congested, I managed to make it to the airport just in time for my flight, thanks to my careful planning and the buffer I had built into my schedule."}  
+Compressed: Made flight despite heavy rain
+
+Now give a title to the sentence in as little words as possible::
+Compress the following sentence: {sentence}  
+"""
+IDEA: 
+    - keep it simple
+    - simple in simple out, easy peezy 
+    - different compression examples
+1. Mean length: 5.217                  
+2. BLEU score: 6.215260251601005
+
+
+
+Model 6: (more exmaples 5-shot)
+system_prompt = "Always give short answers that still have meaning."
+prompt = f"""Here are examples demonstrating how to compress detailed sentences into ultra-short titles (maximum 5 words) by focusing *only* on the core meaning:
+
+Sentence: The multinational technology corporation announced yesterday that it plans to open a massive new research and development facility in the Silicon Valley area next year.
+Compressed Title: Tech Firm Plans New Lab
+
+Sentence: Scientists conducting deep-sea exploration missions recently discovered a previously unknown species of bioluminescent fish living in the Mariana Trench.
+Compressed Title: New Deep-Sea Fish Found
+
+Sentence: After hours of intense negotiations, the striking factory workers and company management reached a provisional agreement earlier this morning to end the labor dispute.
+Compressed Title: Strike Ends With Agreement
+
+Sentence: Official statistics released today indicate that the rate of inflation significantly decreased during the last fiscal quarter, reaching its lowest point in two years.
+Compressed Title: Inflation Rate Drops Sharply
+
+Sentence: Local authorities issued a mandatory evacuation order for residents in coastal communities as a powerful hurricane rapidly approaches the shoreline.
+Compressed Title: Hurricane Prompts Coastal Evacuation
+
+Now, compress the following sentence based on these examples, providing the shortest possible title (maximum 5 words) that captures the core meaning:
+Sentence: {sentence}
+Compressed Title:"""
+IDEA: 
+    - include more comprehenisve examples - 5-shot
+    - longer exampples, more compressing power
+1. Mean length: 5.004                
+2. BLEU score: 2.70703182679361
+
+
+
+
+THE PROBLEM WITH BLUE SCORE:
+1. BLEU is strict. It prefers identical phrasing, so creative or diverse compressions can unfairly score low
+2. Good compression may lower BLEU if it uses different but valid word choices or structure - doesnt work well with paraphrasing
