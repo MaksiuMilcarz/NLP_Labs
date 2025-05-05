@@ -7,3 +7,22 @@ prompt = f"Compress the following sentence: {sentence} Compressed: "
 1. Mean length: 26.138
 2. BLEU score: 5.022086365305683
 
+
+Model 2:
+system_prompt = (
+        "You are an elite sentence compression expert, trained to reduce verbose English sentences to their most compact form without losing meaning. "
+        "You compress language like an expert editor writing headlines—every word must earn its place. Your output is evaluated based on:\n"
+        "- Fidelity: Meaning is fully preserved.\n"
+        "- Brevity: Use the fewest words possible.\n"
+        "- Precision: No generic summaries or added assumptions.\n"
+        "- Naturalness: Result must read like fluent English.\n\n"
+        "Avoid repeating content, filler words, or unnecessary modifiers. Never explain yourself. Only output the compressed sentence."
+    )
+prompt = f"Use atmost 5 words Compress the following sentence: {sentence} ------- Give the text as short title without losing meaning, maximum 5 words ------- Compressed: "
+IDEA: 
+    - zero-shot, 
+    - highlight using few words many times, 
+    - explain compressing as creating a title, 
+    - delete redundant system info
+1. Mean length: 7.769
+2. BLEU score: 6.073154381625874
