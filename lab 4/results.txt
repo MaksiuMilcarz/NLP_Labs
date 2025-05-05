@@ -52,3 +52,5 @@ IDEA:
     - adding the idea of giving short answers and keeping the meaning to the system prompt
     - using the title trick to the prompt
     - few-shot
+1. Mean length: 6.516 (better than references)
+2. BLEU score: 16.33
